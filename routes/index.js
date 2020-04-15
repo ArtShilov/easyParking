@@ -16,19 +16,31 @@ router
     res.render("signup");
   })
   .post(async (req, res, next) => {
-    try {
-      const { username, email, password } = req.body;
+   
+    const { firstName,lastName, phone, email, password } = req.body;
+    if (firstName == '' || lastName  == '' || phone  == ''|| email  == ''|| password  == '') {
+      const message = 'Нужно заполнить все поля'
+      return res.render("signup",{ message }).end(); 
+    }else{
+      // try {
+      console.log(typeof lastName);
+      
       const user = new User({
-        username,
         email,
-        password: await bcrypt.hash(password, saltRounds)
+        password: await bcrypt.hash(password, saltRounds),
+        firstName,
+        lastName,
+        phone
       });
       await user.save();
       req.session.user = user;
-      res.redirect("/dashboard");
-    } catch (error) {
-      next(error);
+      return res.redirect("/dashboard");
     }
+  // } catch (error) {
+  //     next(error);
+   
+  // }
+  
   });
 
 router
@@ -37,24 +49,25 @@ router
     res.render("login");
   })
   .post(async (req, res) => {
-    const { username, password } = req.body;
+    const { phone, password } = req.body;
 
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ phone });
 
     if (user && (await bcrypt.compare(password, user.password))) {
       req.session.user = user;
       res.redirect("/dashboard");
     } else {
-      res.redirect("/login");
+      const message = 'Не совпадает телефон/пароль';
+      res.render("login", { message });
     }
   });
 
 router.get("/dashboard", (req, res) => {
   const { user } = req.session;
   if (req.session.user) {
-    console.log(req.session.user);
+    // console.log(req.session.user);
     
-    res.render("dashboard", { name: user.username });
+    res.render("dashboard", { name: user.firstName });
   } else {
     res.redirect("/login");
   }
