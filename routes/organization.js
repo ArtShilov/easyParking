@@ -11,8 +11,6 @@ router.get('/', sessionOrgChecker, (req, res) => {
 })
 
 router.get('/dashboard', (req, res) => {
-  console.log(req.session.organization, '>>>>>>>>>');
-
   if (req.session.organization) {
     const { organization } = req.session;
     res.render('organization/dashboard', { name: organization.name });
@@ -43,11 +41,9 @@ router.post('/register', async (req, res) => {
     }
   })
   res.redirect("/org/dashboard");
-  console.log(req.session.organization);
 })
 
 router.get('/logout', async (req, res, next) => {
-  console.log(11111);
 
   if (req.session.organization) {
     try {
@@ -81,7 +77,6 @@ router.post('/login', sessionOrgChecker, async (req, res) => {
 
 router.get('/parking', async (req, res) => {
   const parking = await Parking.find()
-  console.log(parking);
   
   res.render('organization/parking', { parking })
 })
@@ -90,10 +85,7 @@ router.get('/newParking', async (req, res) => {
   res.render('organization/addParking')
 })
 
-router.post('/add', async (req, res) => {
-  console.log(req.body);
-  console.log(req.session.organization);
-  
+router.post('/add', async (req, res) => {  
   const { name, position, description, countAll, countNow, price, password } = req.body
   const parking = await new Parking({
     name,
@@ -117,9 +109,31 @@ router.post('/add', async (req, res) => {
   
 })
 
+router.get('/:id', async (req, res) => {
+  const id = req.params.id;
+  const parking = await Parking.findById(id)
+  res.render('organization/oneParking', { parking })
+})
+
 router.post('/delete', async (req, res) => {
-  console.log(req.body);
-  res.end()
+  const idParking = req.body.id
+  const parking = await Parking.findByIdAndDelete(idParking)
+  
+  //логика удаления idParking из Organizaton
+  const orgId = req.session.organization._id
+  const organization = await Organization.findById(orgId)
+  const newArr = organization.parkingId
+  const arr = newArr.filter(i => i.toString() != idParking)
+  organization.parkingId = arr
+  await organization.save()
+  res.redirect('/org/dashboard')
+})
+
+router.post('/edit', async (req, res) => {
+  const idParking = req.body.id
+
+  
+  res.redirect('/org/dashboard')
 })
 
 module.exports = router

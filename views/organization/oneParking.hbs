@@ -1,3 +1,4 @@
+<script src="/js/parkingOne.js" defer></script>
 <div class="page-header">
     <h1>Welcome</h1>
 </div>
@@ -23,10 +24,25 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<ul>
-  {{#each parking}}
-  <li><a href="/org/{{this.id}}">{{this.name}}</a></li>
-  {{/each}}
-</ul>
+<div>
+  <h2>{{parking.name}}</h2>
+  <ul>
+    <li>{{parking.position}}</li>
+    <li>{{parking.description}}</li>
+    <li>{{parking.countAll}}</li>
+    <li>{{parking.countNow}}</li>
+    <li>{{parking.price}}</li>
+    <li>{{parking.countNow}}</li>
+  </ul>
+</div>
+<form action="/org/delete" method="POST">
+  <input type="hidden" name="id" value="{{parking._id}}">
+  <button type="submit">Удалить парковку</button>
+</form>
+
+<div>
+<button class='editOneParkingButton' type="submit">Изменить</button>
+</div>
+<div id='editFormOpen' data-idPark="{{parking._id}}"></div>
 
 
