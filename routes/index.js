@@ -1,12 +1,13 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const { sessionChecker } = require("../middleware/auth");
+const { sessionOrgChecker } = require("../middleware/auth");
 const User = require("../models/users");
 
 const saltRounds = 10;
 const router = express.Router();
 
-router.get("/", sessionChecker, (req, res) => {
+router.get("/", sessionOrgChecker, sessionChecker, (req, res) => {
   res.redirect("/login");
 });
 
@@ -20,8 +21,8 @@ router
     const { firstName, lastName, phone, email, password } = req.body;
     if (firstName == '' || lastName == '' || phone == '' || email == '' || password == '') {
       const message = 'Нужно заполнить все поля'
-      return res.render("auth/signup",{ message }).end(); 
-    }else{
+      return res.render("auth/signup", { message }).end();
+    } else {
       // try {
       console.log(typeof lastName);
 
@@ -36,12 +37,8 @@ router
       req.session.user = user;
       return res.redirect("/map");
     }
-    // } catch (error) {
-    //     next(error);
-
-    // }
-
-  });
+  }
+  );
 
 router
   .route("/login")
