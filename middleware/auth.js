@@ -10,7 +10,15 @@ function cookiesCleaner(req, res, next) {
 // middleware function to check for logged-in users
 const sessionChecker = (req, res, next) => {
   if (req.session.user) {
-    res.redirect("/dashboard");
+    res.redirect("/map");
+  } else {
+    next();
+  }
+};
+
+const sessionOrgChecker = (req, res, next) => {
+  if (req.session.organization) {    
+    res.redirect("/org/dashboard");
   } else {
     next();
   }
@@ -18,5 +26,6 @@ const sessionChecker = (req, res, next) => {
 
 module.exports = {
   sessionChecker,
-  cookiesCleaner
+  cookiesCleaner,
+  sessionOrgChecker
 };

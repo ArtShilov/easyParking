@@ -5,16 +5,17 @@
   "main": "server.js",
   "scripts": {
     "test": "nodemon --ignore sessions server",
-    "start": "node server"
+    "start": "npx nodemon node server"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^4.0.1",
+    "connect-mongodb-session": "^2.3.1",
     "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
-    "hbs": "^4.1.0",
+    "hbs": "^4.1.1",
     "jasmine": "^3.5.0",
     "mongoose": "^5.9.4",
     "morgan": "^1.9.1",

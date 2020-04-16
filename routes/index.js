@@ -1,12 +1,13 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const { sessionChecker } = require("../middleware/auth");
+const { sessionOrgChecker } = require("../middleware/auth");
 const User = require("../models/users");
 
 const saltRounds = 10;
 const router = express.Router();
 
-router.get("/", sessionChecker, (req, res) => {
+router.get("/", sessionOrgChecker, sessionChecker, (req, res) => {
   res.redirect("/login");
 });
 
@@ -20,8 +21,8 @@ router
     const { firstName, lastName, phone, email, password } = req.body;
     if (firstName == '' || lastName == '' || phone == '' || email == '' || password == '') {
       const message = 'Нужно заполнить все поля'
-      return res.render("auth/signup",{ message }).end(); 
-    }else{
+      return res.render("auth/signup", { message }).end();
+    } else {
       // try {
       console.log(typeof lastName);
 
@@ -34,14 +35,10 @@ router
       });
       await user.save();
       req.session.user = user;
-      return res.redirect("/dashboard");
+      return res.redirect("/map");
     }
-    // } catch (error) {
-    //     next(error);
-
-    // }
-
-  });
+  }
+  );
 
 router
   .route("/login")
@@ -55,23 +52,12 @@ router
 
     if (user && (await bcrypt.compare(password, user.password))) {
       req.session.user = user;
-      res.redirect("/dashboard");
+      res.redirect("/map");
     } else {
       const message = 'Не совпадает телефон/пароль';
       res.render("auth/login", { message });
     }
   });
-
-router.get("/dashboard", (req, res) => {
-  const { user } = req.session;
-  if (req.session.user) {
-    // console.log(req.session.user);
-
-    res.render("dashboard", { name: user.firstName });
-  } else {
-    res.redirect("/login");
-  }
-});
 
 router.get("/logout", async (req, res, next) => {
   if (req.session.user) {
@@ -87,8 +73,5 @@ router.get("/logout", async (req, res, next) => {
   }
 });
 
-router.get('/map', (req, res) => {
-  res.render('index');
-});
 
 module.exports = router;
