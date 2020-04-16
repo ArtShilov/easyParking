@@ -5,38 +5,54 @@
   <title>Login Here</title>
   <link rel="stylesheet" href="http://localhost:3000/stylesheets/style.css">
   <link rel="stylesheet" href="http://localhost:3000/stylesheets/layout.css">
-  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=315b9fde-4c81-4d55-a862-8513d7e0f28b"
-    defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  {{#if map}}
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=315b9fde-4c81-4d55-a862-8513d7e0f28b" defer></script>
   <script src="https://yandex.st/jquery/2.2.3/jquery.min.js" defer></script>
-  <script src="/js/map.js" defer>
-  </script>
-  </head>
-  <div class="header">
-    <div class="menu-wrap">
-      <input type="checkbox" class="toggler">
-      <div class="hamburger">
-        <div></div>
-      </div>
-      <div class="menu">
+  <script src="/js/map.js" defer></script>
+  {{/if}}
+</head>
+<div class="header">
+  <div class="menu-wrap">
+    <input type="checkbox" class="toggler">
+    <div class="hamburger">
+      <div></div>
+    </div>
+    <div class="menu">
+      <div>
         <div>
-          <div>
-            <ul>
-              <li><a href="#">Домой</a></li>
-              <li><a href="#">Карта</a></li>
-              <li><a href="#">Условия</a></li>
-              <li><a href="#">Контакты</a></li>
-            </ul>
-          </div>
+          <ul>
+            <li><a href="/">Домой</a></li>
+            <li><a href="#">Карта</a></li>
+            <li><a href="#">Условия</a></li>
+            <li><a href="/org">Организациям</a></li>
+          </ul>
         </div>
       </div>
     </div>
-    <div class="info">
-      БРОНИРОВАНИЕ ДО 15:00
-    </div>
   </div>
+  <div class="info">
+    {{#if logged }}
+      {{#if reservedTime }}
+       ОПЛАЧЕНО ДО: {{reservedTime}}
+      {{else}}
+       <a class="btn header-btn mapBtn" type="submit" href="/login" />КАРТА ПАРКОВОЧНЫХ МЕСТ</a>
+      {{/if}}
+    {{else}}
+    <div class="btnLinks header-btnLinks">
+      <div>
+        <a class="btn header-btn" type="submit" href="/login" />ВОЙТИ</a>
+      </div>
+      <div id="signUpLink">
+        <a class="link header-link" href="/signup">РЕГИСТРАЦИЯ</a>
+      </div>
+    </div>
+    {{/if}}
+  </div>
+</div>
 
-  <body class="container">
-    {{{body}}}
-  </body>
+<body class="container">
+  {{{body}}}
+</body>
 
 </html>
