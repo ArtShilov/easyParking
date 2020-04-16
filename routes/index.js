@@ -34,7 +34,7 @@ router
       });
       await user.save();
       req.session.user = user;
-      return res.redirect("/dashboard");
+      return res.redirect("/map");
     }
     // } catch (error) {
     //     next(error);
@@ -55,23 +55,12 @@ router
 
     if (user && (await bcrypt.compare(password, user.password))) {
       req.session.user = user;
-      res.redirect("/dashboard");
+      res.redirect("/map");
     } else {
       const message = 'Не совпадает телефон/пароль';
       res.render("auth/login", { message });
     }
   });
-
-router.get("/dashboard", (req, res) => {
-  const { user } = req.session;
-  if (req.session.user) {
-    // console.log(req.session.user);
-
-    res.render("dashboard", { name: user.firstName });
-  } else {
-    res.redirect("/login");
-  }
-});
 
 router.get("/logout", async (req, res, next) => {
   if (req.session.user) {
@@ -87,8 +76,5 @@ router.get("/logout", async (req, res, next) => {
   }
 });
 
-router.get('/map', (req, res) => {
-  res.render('index');
-});
 
 module.exports = router;
