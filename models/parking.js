@@ -6,6 +6,7 @@ const parkingSchema = new mongoose.Schema({
     description: { type: String },
     countAll: { type: Number, required: true },
     countNow: { type: Number },
+    userId: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],  
     price: { type: Number, required: true },
     organizationId: { type: mongoose.Schema.Types.ObjectId, ref: 'Organization' },
 });
