@@ -16,15 +16,15 @@ router
     res.render("signup");
   })
   .post(async (req, res, next) => {
-   
-    const { firstName,lastName, phone, email, password } = req.body;
-    if (firstName == '' || lastName  == '' || phone  == ''|| email  == ''|| password  == '') {
+
+    const { firstName, lastName, phone, email, password } = req.body;
+    if (firstName == '' || lastName == '' || phone == '' || email == '' || password == '') {
       const message = 'Нужно заполнить все поля'
-      return res.render("signup",{ message }).end(); 
-    }else{
+      return res.render("signup", { message }).end();
+    } else {
       // try {
       console.log(typeof lastName);
-      
+
       const user = new User({
         email,
         password: await bcrypt.hash(password, saltRounds),
@@ -36,11 +36,11 @@ router
       req.session.user = user;
       return res.redirect("/dashboard");
     }
-  // } catch (error) {
-  //     next(error);
-   
-  // }
-  
+    // } catch (error) {
+    //     next(error);
+
+    // }
+
   });
 
 router
@@ -66,7 +66,7 @@ router.get("/dashboard", (req, res) => {
   const { user } = req.session;
   if (req.session.user) {
     // console.log(req.session.user);
-    
+
     res.render("dashboard", { name: user.firstName });
   } else {
     res.redirect("/login");
@@ -85,6 +85,10 @@ router.get("/logout", async (req, res, next) => {
   } else {
     res.redirect("/login");
   }
+});
+
+router.get('/map', (req, res) => {
+  res.render('index');
 });
 
 module.exports = router;
