@@ -1,14 +1,20 @@
-module.exports = function(app) {
+module.exports = function (app) {
   const express = require("express");
   const morgan = require("morgan");
   const cookieParser = require("cookie-parser");
   const session = require("express-session");
   const path = require("path");
-  const FileStore = require("session-file-store")(session);
+  const MongoStore = require('connect-mongodb-session')(session)//библиотека для сохранении сессии в монго 
+  // const FileStore = require("session-file-store")(session);
   const { cookiesCleaner } = require("./auth");
   const dbConnection = require("./db-connect");
 
   app.use(morgan("dev"));
+
+  const store = new MongoStore({
+    collection: 'sessions', //название коллекции где хранятся сессии
+    uri: `mongodb://localhost:27017/easyParking`
+  })
 
   // Body POST запросов.
   app.use(express.urlencoded({ extended: true }));
@@ -20,14 +26,10 @@ module.exports = function(app) {
   // initialize express-session to allow us track the logged-in user across sessions.
   app.use(
     session({
-      store: new FileStore(),
-      key: "user_sid",
-      secret: "parking",
+      secret: 'some secret value',
       resave: false,
       saveUninitialized: false,
-      cookie: {
-        expires: 100 * 60 * 60 * 24
-      }
+      store,
     })
   );
 
