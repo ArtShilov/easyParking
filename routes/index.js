@@ -13,15 +13,15 @@ router.get("/", sessionChecker, (req, res) => {
 router
   .route("/signup")
   .get(sessionChecker, (req, res) => {
-    res.render("signup");
+    res.render("auth/signup");
   })
   .post(async (req, res, next) => {
 
     const { firstName, lastName, phone, email, password } = req.body;
     if (firstName == '' || lastName == '' || phone == '' || email == '' || password == '') {
       const message = 'Нужно заполнить все поля'
-      return res.render("signup", { message }).end();
-    } else {
+      return res.render("auth/signup",{ message }).end(); 
+    }else{
       // try {
       console.log(typeof lastName);
 
@@ -46,7 +46,7 @@ router
 router
   .route("/login")
   .get(sessionChecker, (req, res) => {
-    res.render("login");
+    res.render("auth/login");
   })
   .post(async (req, res) => {
     const { phone, password } = req.body;
@@ -58,7 +58,7 @@ router
       res.redirect("/dashboard");
     } else {
       const message = 'Не совпадает телефон/пароль';
-      res.render("login", { message });
+      res.render("auth/login", { message });
     }
   });
 
