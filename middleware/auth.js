@@ -16,7 +16,16 @@ const sessionChecker = (req, res, next) => {
   }
 };
 
+const sessionOrgChecker = (req, res, next) => {
+  if (req.session.organization) {    
+    res.redirect("/org/dashboard");
+  } else {
+    next();
+  }
+};
+
 module.exports = {
   sessionChecker,
-  cookiesCleaner
+  cookiesCleaner,
+  sessionOrgChecker
 };

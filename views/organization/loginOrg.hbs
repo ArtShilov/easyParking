@@ -7,10 +7,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
+                <li><a href="/">Регистрация пользователя</a></li>
                 <li><a href="/login">Log In</a></li>
-                <li><a href="/org/login">Log In Organization</a></li>
-                <li><a href="/org/register">SignUP Organization</a></li>
+                <li><a href="/org/register">Register Org</a></li>
                 {{!-- <li><a href="/dashboard">Dashboard</a></li> --}}
             </ul>
 
@@ -24,14 +23,10 @@
 
 <div class="container row">
     <div class="jumbotron col-sm-4 pull-center">
-        <form action="/signup" method="post">
+        <form action="/org/login" method="post">
             <div>
-                <label>Username:</label>
-                <input type="text" name="username" />
-            </div>
-            <div>
-                <label>Email:</label>
-                <input type="text" name="email" />
+                <label>Name:</label>
+                <input type="text" name="name" />
             </div>
             <div>
                 <label>Password:</label>

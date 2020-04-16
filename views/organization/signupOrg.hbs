@@ -10,7 +10,6 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/login">Log In</a></li>
                 <li><a href="/org/login">Log In Organization</a></li>
-                <li><a href="/org/register">SignUP Organization</a></li>
                 {{!-- <li><a href="/dashboard">Dashboard</a></li> --}}
             </ul>
 
@@ -24,14 +23,14 @@
 
 <div class="container row">
     <div class="jumbotron col-sm-4 pull-center">
-        <form action="/signup" method="post">
+        <form action="/org/register" method="post">
             <div>
-                <label>Username:</label>
-                <input type="text" name="username" />
+                <label>Name:</label>
+                <input type="text" name="name" />
             </div>
             <div>
-                <label>Email:</label>
-                <input type="text" name="email" />
+                <label>Phone:</label>
+                <input type="text" name="phone" />
             </div>
             <div>
                 <label>Password:</label>

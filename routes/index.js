@@ -1,12 +1,13 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const { sessionChecker } = require("../middleware/auth");
+const { sessionOrgChecker } = require("../middleware/auth");
 const User = require("../models/users");
 
 const saltRounds = 10;
 const router = express.Router();
 
-router.get("/", sessionChecker, (req, res) => {
+router.get("/", sessionOrgChecker, sessionChecker, (req, res) => {
   res.redirect("/login");
 });
 
@@ -25,7 +26,7 @@ router
       });
       await user.save();
       req.session.user = user;
-      res.redirect("/dashboard");
+      
     } catch (error) {
       next(error);
     }
