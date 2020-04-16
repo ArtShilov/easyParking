@@ -130,13 +130,16 @@ router.post('/delete', async (req, res) => {
 })
 
 router.post('/edit', async (req, res) => {
+  
   const {name,position,description,countAll,price,dataset,id} = req.body;
+  if (name == ''||position == ''||description == ''||countAll == ''||price == ''||dataset == ''||id == '') {
+  return  res.json({status:'400'})
+  }else {
   const parkingNow = await Parking.findByIdAndUpdate({_id:id }, {name,position,description,countAll,price,dataset })
   await parkingNow.save()
-  
-
-  
-  res.json({status:'200'})
+    
+  return res.json({status:'200'})
+}
 })
 
 module.exports = router

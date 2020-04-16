@@ -9,6 +9,8 @@ const parkingSchema = new mongoose.Schema({
     userId: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],  
     price: { type: Number, required: true },
     organizationId: { type: mongoose.Schema.Types.ObjectId, ref: 'Organization' },
+    latitude: { type: Number },
+    longitude: { type: Number},
 });
 
 module.exports = mongoose.model('Parking', parkingSchema);

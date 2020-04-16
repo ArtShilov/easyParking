@@ -8,12 +8,22 @@ document
 
       document.getElementById("editFormOpen").innerHTML = `
     <form  >
-        <input type="text" name="name" placeholder="name">
-      <input type="text" name="position" placeholder="position">
-      <input type="text" name="description" placeholder="description">
-      <input type="text" name="countAll" placeholder="countAll">
-      <input type="text" name="price" placeholder="price">
-    <input type="submit" value="Отправить" class="editParkingForm">
+        <input required type="text" name="name" placeholder="name" value = '${document.getElementById(
+          "parkingDescription"
+        ).firstElementChild.textContent}'>
+      <input required type="text" name="position" placeholder="position" value = '${document.getElementById(
+        "parkingDescription"
+      ).children[1].children[0].textContent}'>
+      <input required type="text" name="description" placeholder="description" value = '${document.getElementById(
+        "parkingDescription"
+      ).children[1].children[1].textContent}'>
+      <input required type="text" name="countAll" placeholder="countAll" value = '${document.getElementById(
+        "parkingDescription"
+      ).children[1].children[2].textContent}'>
+      <input required type="text" name="price" placeholder="price" value = '${document.getElementById(
+        "parkingDescription"
+      ).children[1].children[3].textContent}'>
+    <input type="submit" value="Отправить" class="editParkingForm" >
   
   </form>`;
     } else if (event.target.classList.contains("editOneParkingButtonClose")) {
@@ -42,7 +52,7 @@ document
         })
       ).json();
 
-      console.log(result);
+      // console.log(result);
       if (result.status == "200") {
         document.getElementById("editFormOpen").innerHTML = ``;
 
@@ -75,9 +85,11 @@ document
         ).countAll.value;
         document.getElementById(
           "parkingDescription"
-        ).children[1].children[2].textContent = target.closest(
+        ).children[1].children[3].textContent = target.closest(
           "form"
         ).price.value;
+      }else if (result.status == "400") {
+        document.getElementsByClassName('editMessageSpan')[0].textContent = 'Заполните все поля'
       }
     }
   });
