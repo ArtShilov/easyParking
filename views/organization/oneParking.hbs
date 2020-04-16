@@ -24,15 +24,13 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<div>
+<div id='parkingDescription'>
   <h2>{{parking.name}}</h2>
   <ul>
     <li>{{parking.position}}</li>
     <li>{{parking.description}}</li>
     <li>{{parking.countAll}}</li>
-    <li>{{parking.countNow}}</li>
     <li>{{parking.price}}</li>
-    <li>{{parking.countNow}}</li>
   </ul>
 </div>
 <form action="/org/delete" method="POST">
@@ -43,6 +41,6 @@
 <div>
 <button class='editOneParkingButton' type="submit">Изменить</button>
 </div>
-<div id='editFormOpen' data-idPark="{{parking._id}}"></div>
+<div id='editFormOpen' data-idpark="{{parking._id}}"></div>
 
 

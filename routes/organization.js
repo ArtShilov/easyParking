@@ -130,10 +130,13 @@ router.post('/delete', async (req, res) => {
 })
 
 router.post('/edit', async (req, res) => {
-  const idParking = req.body.id
+  const {name,position,description,countAll,price,dataset,id} = req.body;
+  const parkingNow = await Parking.findByIdAndUpdate({_id:id }, {name,position,description,countAll,price,dataset })
+  await parkingNow.save()
+  
 
   
-  res.redirect('/org/dashboard')
+  res.json({status:'200'})
 })
 
 module.exports = router
