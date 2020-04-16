@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "nodemon --ignore sessions server",
-    "start": "node server"
+    "start": "npx nodemon node server"
   },
   "author": "",
   "license": "ISC",
