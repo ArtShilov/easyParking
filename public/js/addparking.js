@@ -21,4 +21,5 @@ form.addEventListener('submit', async ({ target }) => {
       price: target.price.value,
     }),
   });
+  window.location.replace('/org/dashboard');
 });

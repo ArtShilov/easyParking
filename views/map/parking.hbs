@@ -1,0 +1,17 @@
+<div style="display: flex; flex-direction: column;">
+<div>
+<h1>{{parking.name}}</h1>
+<div class="ifoDiv">{{parking.position}}</div>
+<div class="ifoDiv">{{parking.description}}</div>
+<div class="ifoDiv">{{parking.countAll}}</div>
+<div class="ifoDiv">{{parking.countNow}}</div>
+<div class="ifoDiv">{{parking.price}}</div>
+</div>  
+ <div>
+<form action="map/reserv/" method="post">
+<input class = "inpt" type="number" name="time" placeholder="Время бронирования часов">
+<input class = "inpt" type="hidden" name="id" value='{{parking._id}}'>
+<input class = "btn" type="submit" value="Забронировать">
+</form>
+</div>   
+</div>

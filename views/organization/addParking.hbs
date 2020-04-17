@@ -1,29 +1,4 @@
-<div class="page-header">
-  <h1>Welcome</h1>
-</div>
-
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="/org">Home</a></li>
-
-        {{!-- <a><a href="/org/parking">Мои парковки</a></a> --}}
-        <li><a href="/org/parking">Мои парковки</a></li>
-        <li class="active"><a href="/org/newParking" class="active">Создать новую парковку</a></li>
-
-        {{!-- <li><a href="/signup">Sign Up</a></li> --}}
-        {{!-- <li><a href="/dashboard">Dashboard</a></li> --}}
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        {{!-- <li><a href="/login">Log In</a></li> --}}
-        <li><a href="/logout">Log Out</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+<script src="/js/addparking.js" defer></script>
 
 {{#if error}}
 <p>{{error}}</p>
@@ -31,27 +6,26 @@
 
 <form id="newparking" method="POST">
   <div>
-    <label for="name">Name</label>
-    <input type="text" name="name" required value="{{data.name}}">
+    <label for="name">Название</label>
+    <input class="inpt" type="text" name="name" required value="{{data.name}}">
   </div>
   <div>
-    <label for="Position">Position</label>
-    <input type="text" name="position" required value="{{data.position}}">
+    <label for="Position">Адресс</label>
+    <input class="inpt" type="text" name="position" required value="{{data.position}}">
   </div>
   <div>
-    <label for="description">Description</label>
-    <input type="text" name="description" required value="{{data.description}}">
+    <label for="description">Описание</label>
+    <input class="inpt" type="text" name="description" required value="{{data.description}}">
   </div>
   <div>
-    <label for="countAll">CountAll</label>
-    <input type="text" name="countAll" required value="{{data.countAll}}">
+    <label for="countAll">Колличество парковок</label>
+    <input class="inpt" type="text" name="countAll" required value="{{data.countAll}}">
   </div>
   <div>
-    <label for="price">Price</label>
-    <input type="text" name="price" required value="{{data.price}}">
+    <label for="price">Цена за час</label>
+    <input class="inpt" type="text" name="price" required value="{{data.price}}">
   </div>
-  <input type="submit" value="Отправить">
+  <input class="btn" type="submit" value="Отправить">
 
 </form>
 
-<script src="/js/addparking.js" defer></script>

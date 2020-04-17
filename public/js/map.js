@@ -55,11 +55,11 @@ check().then(() => {
         const placemark = new ymaps.Placemark([+obj.longitude, +obj.latitude], {
           hintContent: `<div class="map__hint">${obj.position}</div>`,
           balloonContent: `<div class="map__balloon">
-          <img class="map__icon-img " src="img/icon.jpg" alt="Parking"/>
-          <p>Адрес: ${obj.position}</p>
-          <p>Цена: ${obj.price}</p>
-          <p>Вместимость: ${obj.countAll}</p>
-          <a href=""> <button id="${obj._id}" class="reservbtn">Забронировать</button></a>
+          <img class="map__icon-img " src="http://localhost:3000/img/icon.jpg" alt="Parking"/>
+          <div class="ifoDiv">${obj.position}</div>
+          <div class="ifoDiv">${obj.price}</div>
+          <div class="ifoDiv">${obj.countAll}</div>
+          <a class ="btn" href="/map/reserv/${obj._id}"> ЗАБРОНИРОВАТЬ</a>
           </div>`,
         },
         {

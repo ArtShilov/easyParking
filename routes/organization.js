@@ -4,10 +4,7 @@ const { validationResult } = require('express-validator');
 const Organization = require('../models/organization');
 const Parking = require('../models/parking');
 const { sessionOrgChecker } = require('../middleware/auth');
-// const { validationResult } = require('express-validator/check')
-// const  validationResult  = require("express-validator");
-
-const { registerValidators, addParkingValidators, loginOrgCalidators } = require('../utils/validators');
+const { registerValidators, addParkingValidators } = require('../utils/validators');
 
 
 const saltRounds = 10;
@@ -16,10 +13,11 @@ router.get('/', sessionOrgChecker, (req, res) => {
   res.render('organization/loginOrg');
 });
 
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard', async (req, res) => {
   if (req.session.organization) {
+    const parking = await Parking.find({ organizationId: req.session.organization._id })
     const { organization } = req.session;
-    res.render('organization/dashboard', { name: organization.name });
+    res.render('organization/dashboard', { name: organization.name, logout: "/org/logout", logged: true, parking });
   } else {
     res.redirect('/org');
   }
@@ -49,7 +47,6 @@ router.post('/register', registerValidators, async (req, res) => {
       req.flash('error', 'Пользователь с таким номером уже существует');
       res.redirect('/org/register');
     } else {
-      console.log(1111);
 
       const organization = await new Organization({
         name,
@@ -58,7 +55,6 @@ router.post('/register', registerValidators, async (req, res) => {
         password: await bcrypt.hash(password, saltRounds),
       }).save();
       req.session.organization = organization;
-      console.log(req.session.organization);
       req.session.save((err) => {
         if (err) {
           throw err;
@@ -67,7 +63,6 @@ router.post('/register', registerValidators, async (req, res) => {
       res.redirect('/org/dashboard');
     }
   } catch (e) {
-    console.log(e);
   }
 });
 
@@ -124,14 +119,15 @@ router.get('/parking', async (req, res) => {
 
   const parking = await Parking.find({ organizationId: idOrg });
 
-  res.render('organization/parking', { parking });
+  res.render('organization/parking', { parking, logout: "/org/logout", logged: true });
 });
 
 router.get('/newParking', async (req, res) => {
-  res.render('organization/addParking');
+  res.render('organization/addParking', {logout: "/org/logout", logged: true});
 });
 
 router.post('/add', addParkingValidators, async (req, res) => {
+  //валидация
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).render('organization/addParking', {
@@ -173,7 +169,7 @@ router.post('/add', addParkingValidators, async (req, res) => {
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
   const parking = await Parking.findById(id);
-  res.render('organization/oneParking', { parking });
+  res.render('organization/oneParking', { parking, logged: true, logout: "/logout" });
 });
 
 router.post('/delete', async (req, res) => {
@@ -202,12 +198,6 @@ router.post('/edit', async (req, res) => {
   });
   await parkingNow.save();
   return res.json({ status: '200' });
-});
-
-router.get('/allparking', async (req, res) => {
-  const parkings = await Parking.find();
-  console.log(parkings);
-  res.json({ answer: parkings });
 });
 
 module.exports = router;

@@ -24,9 +24,6 @@ router
       const message = 'Нужно заполнить все поля'
       return res.render("auth/signup", { message }).end();
     } else {
-      // try {
-      console.log(typeof lastName);
-
       const user = new User({
         email,
         password: await bcrypt.hash(password, saltRounds),

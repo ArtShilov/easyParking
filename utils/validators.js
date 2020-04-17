@@ -19,6 +19,4 @@ exports.addParkingValidators = [
   body('price').isNumeric().withMessage('Введите конкретную сумму')
 ]
 
-exports.loginOrgValidators = [ 
 
-]
