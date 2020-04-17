@@ -3,7 +3,10 @@ const Organization = require('../models/organization')
 const bcrypt = require("bcrypt");
 const Parking = require('../models/parking')
 const { sessionOrgChecker } = require("../middleware/auth");
-const { validationResult } = require('express-validator/check')
+// const { validationResult } = require('express-validator/check')
+// const  validationResult  = require("express-validator");
+const {validationResult} = require("express-validator")
+
 const { registerValidators, addParkingValidators, loginOrgCalidators } = require('../utils/validators')
 
 
@@ -72,7 +75,7 @@ router.get('/login', sessionOrgChecker, (req, res) => {
   })
 })
 
-router.post('/login', loginOrgCalidators, async (req, res) => {
+router.post('/login',  async (req, res) => {
   try {
     const { phone, password } = req.body
     const organization = await Organization.findOne({ phone })
