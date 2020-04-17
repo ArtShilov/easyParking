@@ -21,20 +21,32 @@
     </div><!-- /.container-fluid -->
 </nav>
 
+{{#if error}}
+  <p>{{error}}</p>
+{{/if}}
+
 <div class="container row">
     <div class="jumbotron col-sm-4 pull-center">
         <form action="/org/register" method="post">
             <div>
-                <label>Name:</label>
+                <label>Title:</label>
                 <input type="text" name="name" />
             </div>
             <div>
                 <label>Phone:</label>
-                <input type="text" name="phone" />
+                <input type="tel" name="phone" />
+            </div>
+            <div>
+                <label>Email:</label>
+                <input type="email" name="email" />
             </div>
             <div>
                 <label>Password:</label>
                 <input type="password" name="password" />
+            </div>
+            <div>
+                <label>Pass again:</label>
+                <input type="password" name="confirm" />
             </div>
             <div>
                 <input class="btn btn-primary" type="submit" value="Sign Up" />
