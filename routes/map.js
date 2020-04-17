@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
   }
 });
 
+
 router.get('/reserv/:id', async (req, res) => {
   const id = req.params.id
   const parking = await Parking.findById(id)
@@ -30,5 +31,6 @@ router.post('/reserv', async (req, res) => {
   const reservedTime = req.body.time;
   res.render('/map', { reservedTime, logged: true })
 })
+
 
 module.exports = router;
