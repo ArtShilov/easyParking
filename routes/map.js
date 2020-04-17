@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     const { user } = req.session;
   if (req.session.user) {
 
-    res.render("map/index", { name: user.firstName, map: true});
+    res.render("map/index", { name: user.firstName, map: true, logout: "/logout"});
   } else {
     res.redirect("/login");
   }
