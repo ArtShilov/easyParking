@@ -31,6 +31,7 @@ document
 
       event.target.classList.add("editOneParkingButton");
       event.target.classList.remove("editOneParkingButtonClose");
+
     } else if (event.target.classList.contains("editParkingForm")) {
       event.preventDefault();
       const target = event.target;
