@@ -1,7 +1,8 @@
 /* CORE STYLES */
+
 :root {
   --primary-color: #19BB4F;
-  --overlay-color: rgba(24, 39, 51 , 0.85);
+  --overlay-color: rgba(25, 39, 51, 0.85);
   --menu-speed: 0.3s;
 }
 
@@ -9,18 +10,76 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
 }
 
 body {
   font-family: 'Roboto', sans-serif;
   line-height: 1.4;
 }
-head{
+
+head {
   position: relative;
 }
 
 .container {
-margin-top: 70px;
+  margin-top: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 95vh;
+}
+
+.container-form {
+  max-width: 250px;
+  color: #303030
+}
+
+h1 {
+  margin: 1rem 0;
+}
+
+.inpt {
+  width: 100%;
+  border-radius: 4px;
+  border: solid 2px grey;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  outline: none;
+  color: #404040;
+  font-size: 1.25rem;
+  box-shadow: 0px 8px 15px rgba(5, 5, 5, 0.05);
+}
+
+.inpt:focus {
+  border: solid 2px var(--primary-color);
+}
+
+.btnLinks {
+  cursor: pointer;
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+.header-btnLinks{
+  justify-content: space-evenly;
+}
+
+#signUpLink {
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+.header-link {
+  color: white;
+  font-size: 1rem;
 }
 
 .showcase {
@@ -61,12 +120,15 @@ margin-top: 70px;
 .btn {
   display: inline-block;
   border: none;
+  cursor: pointer;
   background: var(--primary-color);
   color: #fff;
   padding: 0.75rem 1.5rem;
-  margin-top: 1rem;
+  border-radius: 4px;
   transition: opacity 1s ease-in-out;
   text-decoration: none;
+  font-size: 1rem;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 .btn:hover {
@@ -74,8 +136,9 @@ margin-top: 70px;
 }
 
 /* MENU STYLES Поменять posittion на fixed, чтобы открепить бургер меню от headera */
+
 .menu-wrap {
-  position: absolute; 
+  position: absolute;
   top: 5px;
   left: 5px;
   z-index: 1;
@@ -108,7 +171,8 @@ margin-top: 70px;
 }
 
 /* Hamburger Line */
-.menu-wrap .hamburger > div {
+
+.menu-wrap .hamburger>div {
   position: relative;
   flex: none;
   width: 100%;
@@ -121,8 +185,8 @@ margin-top: 70px;
 }
 
 /* Hamburger Lines - Top & Bottom */
-.menu-wrap .hamburger > div::before,
-.menu-wrap .hamburger > div::after {
+
+.menu-wrap .hamburger>div::before, .menu-wrap .hamburger>div::after {
   content: '';
   position: absolute;
   z-index: 1;
@@ -133,40 +197,44 @@ margin-top: 70px;
 }
 
 /* Moves Line Down */
-.menu-wrap .hamburger > div::after {
+
+.menu-wrap .hamburger>div::after {
   top: 10px;
 }
 
 /* Toggler Animation */
-.menu-wrap .toggler:checked + .hamburger > div {
+
+.menu-wrap .toggler:checked+.hamburger>div {
   transform: rotate(135deg);
 }
 
 /* Turns Lines Into X */
-.menu-wrap .toggler:checked + .hamburger > div:before,
-.menu-wrap .toggler:checked + .hamburger > div:after {
+
+.menu-wrap .toggler:checked+.hamburger>div:before, .menu-wrap .toggler:checked+.hamburger>div:after {
   top: 0;
   transform: rotate(90deg);
 }
 
 /* Rotate On Hover When Checked */
-.menu-wrap .toggler:checked:hover + .hamburger > div {
+
+.menu-wrap .toggler:checked:hover+.hamburger>div {
   transform: rotate(225deg);
 }
 
 /* Show Menu */
-.menu-wrap .toggler:checked ~ .menu {
+
+.menu-wrap .toggler:checked~.menu {
   visibility: visible;
 }
 
-.menu-wrap .toggler:checked ~ .menu > div {
+.menu-wrap .toggler:checked~.menu>div {
   transform: scale(1);
   transition-duration: var(--menu-speed);
 }
 
-.menu-wrap .toggler:checked ~ .menu > div > div {
+.menu-wrap .toggler:checked~.menu>div>div {
   opacity: 1;
-  transition:  opacity 0.2s ease 0.2s;
+  transition: opacity 0.2s ease 0.2s;
 }
 
 .menu-wrap .menu {
@@ -182,7 +250,7 @@ margin-top: 70px;
   justify-content: center;
 }
 
-.menu-wrap .menu > div {
+.menu-wrap .menu>div {
   background: var(--overlay-color);
   border-radius: 50%;
   width: 200vw;
@@ -195,7 +263,7 @@ margin-top: 70px;
   transition: all 0.4s ease;
 }
 
-.menu-wrap .menu > div > div {
+.menu-wrap .menu>div>div {
   text-align: center;
   max-width: 90vw;
   max-height: 100vh;
@@ -203,22 +271,22 @@ margin-top: 70px;
   transition: opacity 0.3s ease;
 }
 
-.menu-wrap .menu > div > div > ul > li {
+.menu-wrap .menu>div>div>ul>li {
   list-style: none;
   color: #fff;
   font-size: 7rem;
   padding: 1rem;
 }
 
-.menu-wrap .menu > div > div > ul > li > a {
+.menu-wrap .menu>div>div>ul>li>a {
   color: inherit;
   text-decoration: none;
   transition: color 0.4s ease;
 }
 
-.header{
+.header {
   height: 65px;
-  background-color:#19BB4F;
+  background-color: #19BB4F;
   position: absolute;
   align-items: center;
   display: flex;
@@ -229,8 +297,18 @@ margin-top: 70px;
   height: 70px;
 }
 
-.info{
+.info {
   color: white;
-  width: 420px;
-  font-size: 32px;
+  width: 360px;
+  font-size: 2rem;
+  margin-right: 1rem;
+}
+
+.header-btn {
+  color: white;
+  border: white solid 2px;
+}
+.mapBtn{
+  justify-self: right;
+  float: right
 }

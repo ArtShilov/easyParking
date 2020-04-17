@@ -1,43 +1,27 @@
-<div class="page-header">
-  <h1>Log In page</h1>
-</div>
-
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="/signup">Sign Up</a></li>
-        <li><a href="/org">For organizations</a></li>
-        {{!-- <li><a href="/dashboard">Dashboard</a></li> --}}
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        {{!-- <li><a href="/login">Log In</a></li> --}}
-        {{!-- <li><a href="/logout">Log Out</a></li> --}}
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-<div class="container row">
-
-  <div class="jumbotron col-sm-4 pull-center">
-    {{#if message }}
-    <span>{{message}}</span>
-    {{/if}}
-    <form action="/login" method="post">
-      <div>
-        <label>Phone:</label>
-        <input type="tel" name="phone" />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" name="password" />
-      </div>
-      <div>
-        <input class="btn btn-primary" type="submit" value="Log In" />
-      </div>
-    </form>
+<div class="container">
+  <div class="container-form">
+    <h1> Авторизация</h1>
+    <div class="jumbotron col-sm-4 pull-center">
+      {{#if message }}
+      <span>{{message}}</span>
+      {{/if}}
+      <form action="/login" method="post">
+        <div>
+          <input type="tel" name="phone" class="inpt" placeholder="Телефон" />
+        </div>
+        <div>
+          <input type="password" name="password" class="inpt" placeholder="Пароль" />
+        </div>
+        <div>
+          <div class="btnLinks">
+            <div>
+              <input class="btn" type="submit" value="ВОЙТИ" />
+            </div>
+            <div id="signUpLink">
+              <a class="link" href="/signup">РЕГИСТРАЦИЯ</a>
+            </div>
+          </div>
+      </form>
+    </div>
   </div>
 </div>
