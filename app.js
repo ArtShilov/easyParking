@@ -15,7 +15,6 @@ useMiddleware(app);
 // Подключаем импортированные маршруты с определенным url префиксом.
 app.use("/", indexRouter);
 app.use('/org', organizationRouter);
-
 app.use("/map", mapRouter);
 
 useErrorHandlers(app);
