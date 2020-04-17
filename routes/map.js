@@ -28,7 +28,7 @@ router.post('/reserv', async (req, res) => {
   parking.countNow -= 1;
   await parking.save();
   const reservedTime = req.body.time;
-  res.render('/map', { reservedTime })
+  res.render('/map', { reservedTime, logged: true })
 })
 
 module.exports = router;

@@ -122,7 +122,7 @@ router.get('/parking', async (req, res) => {
   const idOrg = req.session.organization._id;
 
   const parking = await Parking.find({ organizationId: idOrg })
-
+})
 
 router.get('/parking', async (req, res) => {
   const parking = await Parking.find()
