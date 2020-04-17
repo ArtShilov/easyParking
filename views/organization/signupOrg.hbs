@@ -6,6 +6,9 @@
       {{#if message }}
       <span>{{message}}</span>
       {{/if}}
+      {{#if error}}
+  <p>{{error}}</p>
+       {{/if}}
       <form action="/org/register" method="post">
 
         <div>
@@ -16,6 +19,7 @@
           <input type="tel" name="phone" class="inpt" placeholder="Телефон" />
         </div>
 
+
         <div>
           <input type="email" name="email" class="inpt" placeholder="email" />
         </div>
@@ -23,6 +27,9 @@
         <div>
           <input type="password" name="password" class="inpt" placeholder="Пароль" />
         </div>
+                    <div>
+                <input  class="inpt" type="password" name="confirm"  placeholder="Повторите пароль" />
+            </div>
         <div>
           <div class="btnLinks">
             <div>
