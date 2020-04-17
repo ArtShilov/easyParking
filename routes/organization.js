@@ -3,9 +3,7 @@ const Organization = require('../models/organization')
 const bcrypt = require("bcrypt");
 const Parking = require('../models/parking')
 const { sessionOrgChecker } = require("../middleware/auth");
-// const { validationResult } = require('express-validator/check')
-// const  validationResult  = require("express-validator");
-const {validationResult} = require("express-validator")
+const { validationResult } = require("express-validator")
 
 const { registerValidators, addParkingValidators, loginOrgCalidators } = require('../utils/validators')
 
@@ -16,10 +14,11 @@ router.get('/', sessionOrgChecker, (req, res) => {
   res.render('organization/loginOrg')
 })
 
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard', async (req, res) => {
   if (req.session.organization) {
     const { organization } = req.session;
-    res.render('organization/dashboard', { name: organization.name });
+    const parking = await Parking.find()
+    res.render('organization/dashboard', { name: organization.name, logged: true, parking, logout: "org/logout"  });
   } else {
     res.redirect('/org');
   }
@@ -75,7 +74,7 @@ router.get('/login', sessionOrgChecker, (req, res) => {
   })
 })
 
-router.post('/login',  async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const { phone, password } = req.body
     const organization = await Organization.findOne({ phone })
@@ -124,11 +123,16 @@ router.get('/parking', async (req, res) => {
 
   const parking = await Parking.find({ organizationId: idOrg })
 
-  res.render('organization/parking', { parking })
+
+router.get('/parking', async (req, res) => {
+  const parking = await Parking.find()
+  
+  res.render('organization/parking', { parking, logout: "org/logout", logged: true })
+
 })
 
 router.get('/newParking', async (req, res) => {
-  res.render('organization/addParking')
+  res.render('organization/addParking', {logout: "org/logout", logged: true})
 })
 
 router.post('/add', addParkingValidators, async (req, res) => {
@@ -143,18 +147,22 @@ router.post('/add', addParkingValidators, async (req, res) => {
         description: req.body.description,
         countAll: req.body.description,
         price: req.body.price,
+
       }
     })
   }
 
-  const { name, position, description, countAll, price } = req.body
+  const { name, position, description, countAll, price, latitude, longitude } = req.body
   const parking = await new Parking({
     name,
     position,
     description,
     countAll,
+    countNow: countAll,
     price,
-    organizationId: req.session.organization._id
+    organizationId: req.session.organization._id,
+    latitude,
+    longitude
   }).save()
 
   const idOrg = req.session.organization._id
@@ -171,7 +179,7 @@ router.post('/add', addParkingValidators, async (req, res) => {
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
   const parking = await Parking.findById(id)
-  res.render('organization/oneParking', { parking })
+  res.render('organization/oneParking', { parking, logout: "org/logout", logged: true })
 })
 
 router.post('/delete', async (req, res) => {
@@ -188,15 +196,16 @@ router.post('/delete', async (req, res) => {
   res.redirect('/org/dashboard')
 })
 
+//изменение парковки
 router.post('/edit', async (req, res) => {
-  const {name,position,description,countAll,price,dataset,id} = req.body;
-  if (name == ''||position == ''||description == ''||countAll == ''||price == ''||dataset == ''||id == '') {
-  return  res.json({status:'400'})
-  }else {
-  const parkingNow = await Parking.findByIdAndUpdate({_id:id }, {name,position,description,countAll,price,dataset })
-  await parkingNow.save() 
-  return res.json({status:'200'})
-}
+  const { name, position, description, countAll, price, dataset, id } = req.body;
+  if (name == '' || position == '' || description == '' || countAll == '' || price == '' || dataset == '' || id == '') {
+    return res.json({ status: '400' })
+  } else {
+    const parkingNow = await Parking.findByIdAndUpdate({ _id: id }, { name, position, description, countAll, price, dataset })
+    await parkingNow.save()
+    return res.json({ status: '200' })
+  }
 })
 
 module.exports = router
