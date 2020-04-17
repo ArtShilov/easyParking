@@ -11,7 +11,7 @@
 
         {{!-- <a><a href="/org/parking">Мои парковки</a></a> --}}
         <li><a href="/org/parking">Мои парковки</a></li>
-        <li><a href="/org/newParking" class="active">Создать новую парковку</a></li>
+        <li class="active"><a href="/org/newParking" class="active">Создать новую парковку</a></li>
 
         {{!-- <li><a href="/signup">Sign Up</a></li> --}}
         {{!-- <li><a href="/dashboard">Dashboard</a></li> --}}
@@ -24,34 +24,31 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+{{#if error}}
+<p>{{error}}</p>
+{{/if}}
+
 <form action="/org/add" method="POST">
   <div>
     <label for="name">Name</label>
-    <input type="text" name="name" required>
+    <input type="text" name="name" required value="{{data.name}}">
   </div>
   <div>
     <label for="Position">Position</label>
-    <input type="text" name="position" required>
+    <input type="text" name="position" required value="{{data.position}}">
   </div>
   <div>
     <label for="description">Description</label>
-    <input type="text" name="description" required>
+    <input type="text" name="description" required value="{{data.description}}">
   </div>
   <div>
     <label for="countAll">CountAll</label>
-    <input type="text" name="countAll" required>
-  </div>
-  <div>
-    <label for="countNow">CountNow</label>
-    <input type="text" name="countNow" required>
+    <input type="text" name="countAll" required value="{{data.countAll}}">
   </div>
   <div>
     <label for="price">Price</label>
-    <input type="text" name="price" required>
-  </div>
-  <div>
-    <label for="password">Password</label>
-    <input type="password" name="password" required>
+    <input type="text" name="price" required value="{{data.price}}">
   </div>
   <input type="submit" value="Отправить">
 

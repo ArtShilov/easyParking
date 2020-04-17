@@ -1,6 +1,7 @@
 module.exports = function (app) {
   const express = require("express");
   const morgan = require("morgan");
+  const flash = require('connect-flash')
   const cookieParser = require("cookie-parser");
   const session = require("express-session");
   const path = require("path");
@@ -8,7 +9,6 @@ module.exports = function (app) {
   // const FileStore = require("session-file-store")(session);
   const { cookiesCleaner } = require("./auth");
   const dbConnection = require("./db-connect");
-
   app.use(morgan("dev"));
 
   const store = new MongoStore({
@@ -32,6 +32,7 @@ module.exports = function (app) {
       store,
     })
   );
+  app.use(flash())
 
   app.use(cookiesCleaner);
 
@@ -41,5 +42,6 @@ module.exports = function (app) {
   // Подключаем views(hbs)
   app.set("views", path.join(__dirname, '..', "views"));
   app.set("view engine", "hbs");
-
+  
+  
 };
