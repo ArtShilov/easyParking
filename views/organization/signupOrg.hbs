@@ -7,8 +7,8 @@
       <span>{{message}}</span>
       {{/if}}
       {{#if error}}
-  <p>{{error}}</p>
-       {{/if}}
+      <p>{{error}}</p>
+      {{/if}}
       <form action="/org/register" method="post">
 
         <div>
@@ -25,11 +25,13 @@
         </div>
 
         <div>
-          <input type="password" name="password" class="inpt" placeholder="Пароль" />
+          <input type="password" name="password" class="inpt"
+            placeholder="Пароль" />
         </div>
-                    <div>
-                <input  class="inpt" type="password" name="confirm"  placeholder="Повторите пароль" />
-            </div>
+        <div>
+          <input class="inpt" type="password" name="confirm"
+            placeholder="Повторите пароль" />
+        </div>
         <div>
           <div class="btnLinks">
             <div>
@@ -39,7 +41,7 @@
               <a class="link" href="/org/login">ВОЙТИ</a>
             </div>
           </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
-</div>
