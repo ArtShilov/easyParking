@@ -1,48 +1,28 @@
 <script src="/js/parkingOne.js" defer></script>
-<div class="page-header">
-    <h1>Welcome</h1>
-</div>
-
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="/org">Home</a></li>
-                
-                {{!-- <a><a href="/org/parking">Мои парковки</a></a> --}}
-                <li><a href="/org/newParking">Создать новую парковку</a></li>
-                
-                {{!-- <li><a href="/signup">Sign Up</a></li> --}}
-                {{!-- <li><a href="/dashboard">Dashboard</a></li> --}}
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                {{!-- <li><a href="/login">Log In</a></li> --}}
-                <li><a href="/logout">Log Out</a></li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
 <div>
-  <h2>{{parking.name}}</h2>
+  <h1>{{parking.name}}</h1>
   <ul>
-    <li>{{parking.position}}</li>
-    <li>{{parking.description}}</li>
-    <li>{{parking.countAll}}</li>
-    <li>{{parking.countNow}}</li>
-    <li>{{parking.price}}</li>
-    <li>{{parking.countNow}}</li>
+    <li>Местоположение<br>{{parking.position}}</li>
+    <li>Описание<br>{{parking.description}}</li>
+    <li>Парковочных мест <br>{{parking.countAll}}</li>
+    <li>Свободных парковок <br>{{parking.countNow}}</li>
+    <li>Цена за час <br>{{parking.price}} руб.</li>
+
   </ul>
+  <div class="btnLinks">
+    <div>
+      <form action="/org/delete" method="POST">
+        <input type="hidden" name="id" value="{{parking._id}}">
+        <button class="btn bcRed" type="submit">Удалить парковку</button>
+      </form>
+    </div>
+    <div id="signUpLink" style="display: none;">
+      <div>
+        <button class='editOneParkingButton btn' type="submit">Изменить</button>
+      </div>
+    </div>
+  </div>
 </div>
-<form action="/org/delete" method="POST">
-  <input type="hidden" name="id" value="{{parking._id}}">
-  <button type="submit">Удалить парковку</button>
-</form>
 
-<div>
-<button class='editOneParkingButton' type="submit">Изменить</button>
-</div>
+
 <div id='editFormOpen' data-idPark="{{parking._id}}"></div>
-
-

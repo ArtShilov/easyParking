@@ -10,10 +10,11 @@ router.get('/', sessionOrgChecker, (req, res) => {
   res.render('organization/loginOrg')
 })
 
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard', async (req, res) => {
   if (req.session.organization) {
     const { organization } = req.session;
-    res.render('organization/dashboard', { name: organization.name });
+    const parking = await Parking.find()
+    res.render('organization/dashboard', { name: organization.name, logged: true, parking, logout: "org/logout"  });
   } else {
     res.redirect('/org');
   }
@@ -78,11 +79,11 @@ router.post('/login', sessionOrgChecker, async (req, res) => {
 router.get('/parking', async (req, res) => {
   const parking = await Parking.find()
   
-  res.render('organization/parking', { parking })
+  res.render('organization/parking', { parking, logout: "org/logout", logged: true })
 })
 
 router.get('/newParking', async (req, res) => {
-  res.render('organization/addParking')
+  res.render('organization/addParking', {logout: "org/logout", logged: true})
 })
 
 router.post('/add', async (req, res) => {  
@@ -112,7 +113,7 @@ router.post('/add', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
   const parking = await Parking.findById(id)
-  res.render('organization/oneParking', { parking })
+  res.render('organization/oneParking', { parking, logout: "org/logout", logged: true })
 })
 
 router.post('/delete', async (req, res) => {
