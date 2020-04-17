@@ -1,0 +1,18 @@
+<div>
+<h3>{{parking.name}}</h3>
+<span>{{parking.position}}</span>
+<span>{{parking.description}}</span>
+<span>{{parking.countAll}}</span>
+<span>{{parking.countNow}}</span>
+<span>{{parking.price}}</span>
+</div>  
+    
+<form action="map/reserv/" method="post">
+
+<input type="number" name="time" placeholder="На сколько бронируете">
+<input type="hidden" name="id" value='{{parking._id}}'>
+
+<input type="submit" value="Забронировать">
+
+
+</form>

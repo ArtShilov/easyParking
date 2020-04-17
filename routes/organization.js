@@ -3,9 +3,7 @@ const Organization = require('../models/organization')
 const bcrypt = require("bcrypt");
 const Parking = require('../models/parking')
 const { sessionOrgChecker } = require("../middleware/auth");
-// const { validationResult } = require('express-validator/check')
-// const  validationResult  = require("express-validator");
-const {validationResult} = require("express-validator")
+const { validationResult } = require("express-validator")
 
 const { registerValidators, addParkingValidators, loginOrgCalidators } = require('../utils/validators')
 
@@ -75,7 +73,7 @@ router.get('/login', sessionOrgChecker, (req, res) => {
   })
 })
 
-router.post('/login',  async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const { phone, password } = req.body
     const organization = await Organization.findOne({ phone })
@@ -143,18 +141,22 @@ router.post('/add', addParkingValidators, async (req, res) => {
         description: req.body.description,
         countAll: req.body.description,
         price: req.body.price,
+
       }
     })
   }
 
-  const { name, position, description, countAll, price } = req.body
+  const { name, position, description, countAll, price, latitude, longitude } = req.body
   const parking = await new Parking({
     name,
     position,
     description,
     countAll,
+    countNow: countAll,
     price,
-    organizationId: req.session.organization._id
+    organizationId: req.session.organization._id,
+    latitude,
+    longitude
   }).save()
 
   const idOrg = req.session.organization._id
@@ -188,15 +190,16 @@ router.post('/delete', async (req, res) => {
   res.redirect('/org/dashboard')
 })
 
+//изменение парковки
 router.post('/edit', async (req, res) => {
-  const {name,position,description,countAll,price,dataset,id} = req.body;
-  if (name == ''||position == ''||description == ''||countAll == ''||price == ''||dataset == ''||id == '') {
-  return  res.json({status:'400'})
-  }else {
-  const parkingNow = await Parking.findByIdAndUpdate({_id:id }, {name,position,description,countAll,price,dataset })
-  await parkingNow.save() 
-  return res.json({status:'200'})
-}
+  const { name, position, description, countAll, price, dataset, id } = req.body;
+  if (name == '' || position == '' || description == '' || countAll == '' || price == '' || dataset == '' || id == '') {
+    return res.json({ status: '400' })
+  } else {
+    const parkingNow = await Parking.findByIdAndUpdate({ _id: id }, { name, position, description, countAll, price, dataset })
+    await parkingNow.save()
+    return res.json({ status: '200' })
+  }
 })
 
 module.exports = router
