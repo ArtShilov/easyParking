@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const { sessionChecker } = require("../middleware/auth");
 const { sessionOrgChecker } = require("../middleware/auth");
 const User = require("../models/users");
+const Parking = require('../models/parking');
 
 const saltRounds = 10;
 const router = express.Router();
@@ -72,6 +73,13 @@ router.get("/logout", async (req, res, next) => {
     res.redirect("/login");
   }
 });
+
+router.get('/allparking', async (req, res) => {
+  const parkings = await Parking.find();
+  console.log(parkings);
+  res.json({ parkings });
+});
+
 
 
 module.exports = router;

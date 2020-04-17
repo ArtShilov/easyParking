@@ -29,7 +29,7 @@
 <p>{{error}}</p>
 {{/if}}
 
-<form action="/org/add" method="POST">
+<form id="newparking" method="POST">
   <div>
     <label for="name">Name</label>
     <input type="text" name="name" required value="{{data.name}}">
@@ -53,3 +53,5 @@
   <input type="submit" value="Отправить">
 
 </form>
+
+<script src="/js/addparking.js" defer></script>
