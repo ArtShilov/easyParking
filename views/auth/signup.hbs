@@ -1,55 +1,41 @@
-<div class="page-header">
-  <h1>Sign Up page</h1>
-</div>
+<div class="container">
+  <div class="container-form">
+    <h1> Регистрация </h1>
+    <div class="jumbotron col-sm-4 pull-center">
+      {{#if message }}
+      <span>{{message}}</span>
+      {{/if}}
+      <form action="/signup" method="post">
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="/login">Log In</a></li>
-        <li><a href="/org">For organizations</a></li>
-
-        {{!-- <li><a href="/dashboard">Dashboard</a></li> --}}
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        {{!-- <li><a href="/login">Log In</a></li> --}}
-        {{!-- <li><a href="/logout">Log Out</a></li> --}}
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-<div class="container row">
-  <div class="jumbotron col-sm-4 pull-center">
-    {{#if message }}
-    <span>{{message}}</span>
-    {{/if}}
-    <form action="/signup" method="post">
-      <div>
-        <label>First name:</label>
-        <input type="text" name="firstName" />
-      </div>
-      <div>
-        <label>Last name:</label>
-        <input type="text" name="lastName" />
-      </div>
-      <div>
-        <label>Phone:</label>
-        <input type="tel" name="phone" />
-      </div>
-      <div>
-        <label>Email:</label>
-        <input type="email" name="email" />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" name="password" />
-      </div>
-      <div>
-        <input class="btn btn-primary" type="submit" value="Sign Up" />
-      </div>
-    </form>
+        <div>
+          <input type="text" name="firstName" class="inpt" placeholder="Имя" />
+        </div>
+              
+        <div>
+          <input type="text" name="lastName" class="inpt" placeholder="Фамилия" />
+        </div>
+              
+        <div>
+          <input type="tel" name="phone" class="inpt" placeholder="Телефон" />
+        </div>
+              
+        <div>
+          <input type="email" name="email" class="inpt" placeholder="email" />
+        </div>
+              
+        <div>
+          <input type="password" name="password" class="inpt" placeholder="Пароль" />
+        </div>
+        <div>
+          <div class="btnLinks">
+            <div>
+              <input class="btn" type="submit" value="РЕГИСТРАЦИЯ" />
+            </div>
+            <div id="signUpLink">
+              <a class="link" href="/login">ВОЙТИ</a>
+            </div>
+          </div>
+      </form>
+    </div>
   </div>
 </div>

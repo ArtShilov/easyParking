@@ -6,9 +6,8 @@ const User = require("../models/users");
 router.get('/', (req, res) => {
     const { user } = req.session;
   if (req.session.user) {
-    // console.log(req.session.user);
 
-    res.render("map/index", { name: user.firstName });
+    res.render("map/index", { name: user.firstName, map: true});
   } else {
     res.redirect("/login");
   }

@@ -1,56 +1,45 @@
-<div class="page-header">
-    <h1>Sign Up page</h1>
-</div>
-
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-                <li><a href="/login">Log In</a></li>
-                <li><a href="/org/login">Log In Organization</a></li>
-                {{!-- <li><a href="/dashboard">Dashboard</a></li> --}}
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                {{!-- <li><a href="/login">Log In</a></li> --}}
-                {{!-- <li><a href="/logout">Log Out</a></li> --}}
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
-
-{{#if error}}
-  <p>{{error}}</p>
-{{/if}}
-
-<div class="container row">
+<div class="container">
+  <div class="container-form">
+    <h1> Регистрация <br>
+      организации </h1>
     <div class="jumbotron col-sm-4 pull-center">
-        <form action="/org/register" method="post">
-            <div>
-                <label>Title:</label>
-                <input type="text" name="name" />
+      {{#if message }}
+      <span>{{message}}</span>
+      {{/if}}
+      {{#if error}}
+  <p>{{error}}</p>
+       {{/if}}
+      <form action="/org/register" method="post">
+
+        <div>
+          <input type="text" name="name" class="inpt" placeholder="Название" />
+        </div>
+
+        <div>
+          <input type="tel" name="phone" class="inpt" placeholder="Телефон" />
+        </div>
+
+
+        <div>
+          <input type="email" name="email" class="inpt" placeholder="email" />
+        </div>
+
+        <div>
+          <input type="password" name="password" class="inpt" placeholder="Пароль" />
+        </div>
+                    <div>
+                <input  class="inpt" type="password" name="confirm"  placeholder="Повторите пароль" />
             </div>
+        <div>
+          <div class="btnLinks">
             <div>
-                <label>Phone:</label>
-                <input type="tel" name="phone" />
+              <input class="btn" type="submit" value="РЕГИСТРАЦИЯ" />
             </div>
-            <div>
-                <label>Email:</label>
-                <input type="email" name="email" />
+            <div id="signUpLink">
+              <a class="link" href="/org/login">ВОЙТИ</a>
             </div>
-            <div>
-                <label>Password:</label>
-                <input type="password" name="password" />
-            </div>
-            <div>
-                <label>Pass again:</label>
-                <input type="password" name="confirm" />
-            </div>
-            <div>
-                <input class="btn btn-primary" type="submit" value="Sign Up" />
-            </div>
-        </form>
+          </div>
+      </form>
     </div>
+  </div>
 </div>
