@@ -16,6 +16,7 @@ useMiddleware(app);
 app.use("/", indexRouter);
 app.use('/org', organizationRouter);
 app.use("/map", mapRouter);
+
 //страница 404
 app.use(errorHandler)
 

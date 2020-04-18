@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
     res.render('map/index', {
       name: user.firstName, map: true, logged: true, logout: '/logout',
     });
+
   } else {
     res.redirect('/login');
   }
@@ -43,6 +44,7 @@ router.get('/reserv/:id', async (req, res) => {
     parking,
   });
 });
+
 
 router.post('/reserv', async (req, res) => {
   const { id } = req.body;

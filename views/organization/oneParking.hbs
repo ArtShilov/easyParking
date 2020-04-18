@@ -26,13 +26,14 @@
 </nav> --}}
 <div id='parkingDescription'>
   <h2>{{parking.name}}</h2>
+
   <ul>
     <li>Местоположение<br>{{parking.position}}</li>
     <li>Описание<br>{{parking.description}}</li>
     <li>Парковочных мест <br>{{parking.countAll}}</li>
     <li>Свободных парковок <br>{{parking.countNow}}</li>
     <li>Цена за час <br>{{parking.price}} руб.</li>
-
+</div>
   </ul>
   <div class="btnLinks">
     <div>
@@ -41,7 +42,7 @@
         <button class="btn bcRed" type="submit">Удалить парковку</button>
       </form>
     </div>
-    <div id="signUpLink" style="display: none;">
+    <div id="signUpLink" >
       <div>
         <button class='editOneParkingButton btn' type="submit">Изменить</button>
       </div>
