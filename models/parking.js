@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const parkingSchema = new mongoose.Schema({
   name: { type: String, required: true },

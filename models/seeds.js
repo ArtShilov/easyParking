@@ -3,12 +3,9 @@ const Parking = require('./parking');
 const Organization = require('./organization');
 
 
-
 async function metodSocialNetwork() {
-
-
-  let Parking = await Parking.create({    
-    name: "",
+  const Parking = await Parking.create({
+    name: '',
     position: { type: String, required: true },
     description: { type: String },
     countAll: { type: Number, required: true },
@@ -17,8 +14,6 @@ async function metodSocialNetwork() {
     password: { type: String, required: true },
     organizationId: { type: mongoose.Schema.Types.ObjectId, ref: 'Organization' },
   });
-
-
 
 
   // let user2 = await UserModel.create({
@@ -39,7 +34,7 @@ async function metodSocialNetwork() {
   //   userID: [user1._id],
   //   postID: [post1._id],
   //   text: faker.lorem.sentence(),
-  //   parentID: [comment1._id] //здесь (это ответ на коментарий) ссылаюсь на id comment1 
+  //   parentID: [comment1._id] //здесь (это ответ на коментарий) ссылаюсь на id comment1
   // })
 
 
@@ -47,4 +42,4 @@ async function metodSocialNetwork() {
   mongoose.disconnect();
 }
 
-metodSocialNetwork() // вызов функции
+metodSocialNetwork(); // вызов функции

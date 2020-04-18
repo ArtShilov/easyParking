@@ -15,9 +15,11 @@ router.get('/', sessionOrgChecker, (req, res) => {
 
 router.get('/dashboard', async (req, res) => {
   if (req.session.organization) {
-    const parking = await Parking.find({ organizationId: req.session.organization._id })
+    const parking = await Parking.find({ organizationId: req.session.organization._id });
     const { organization } = req.session;
-    res.render('organization/dashboard', { name: organization.name, logout: "/org/logout", logged: true, parking });
+    res.render('organization/dashboard', {
+      name: organization.name, logout: '/org/logout', logged: true, parking,
+    });
   } else {
     res.redirect('/org');
   }
@@ -47,7 +49,6 @@ router.post('/register', registerValidators, async (req, res) => {
       req.flash('error', 'Пользователь с таким номером уже существует');
       res.redirect('/org/register');
     } else {
-
       const organization = await new Organization({
         name,
         phone,
@@ -63,6 +64,7 @@ router.post('/register', registerValidators, async (req, res) => {
       res.redirect('/org/dashboard');
     }
   } catch (e) {
+    console.log(e);
   }
 });
 
@@ -118,16 +120,16 @@ router.get('/parking', async (req, res) => {
   const idOrg = req.session.organization._id;
 
   const parking = await Parking.find({ organizationId: idOrg });
-
-  res.render('organization/parking', { parking, logout: "/org/logout", logged: true });
+  res.render('organization/parking', { parking, logout: '/org/logout', logged: true });
 });
 
+
 router.get('/newParking', async (req, res) => {
-  res.render('organization/addParking', {logout: "/org/logout", logged: true});
+  res.render('organization/addParking', { logout: '/org/logout', logged: true });
 });
 
 router.post('/add', addParkingValidators, async (req, res) => {
-  //валидация
+  // валидация
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).render('organization/addParking', {
@@ -145,15 +147,17 @@ router.post('/add', addParkingValidators, async (req, res) => {
   const {
     name, position, description, countAll, price, latitude, longitude,
   } = req.body;
+
   const parking = await new Parking({
     name,
     position,
     description,
     countAll,
+    countNow: countAll,
     price,
+    organizationId: req.session.organization._id,
     latitude,
     longitude,
-    organizationId: req.session.organization._id,
   }).save();
 
   const idOrg = req.session.organization._id;
@@ -169,7 +173,7 @@ router.post('/add', addParkingValidators, async (req, res) => {
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
   const parking = await Parking.findById(id);
-  res.render('organization/oneParking', { parking, logged: true, logout: "/logout" });
+  res.render('organization/oneParking', { parking, logged: true, logout: '/logout' });
 });
 
 router.post('/delete', async (req, res) => {
@@ -186,6 +190,7 @@ router.post('/delete', async (req, res) => {
   res.redirect('/org/dashboard');
 });
 
+// изменение парковки
 router.post('/edit', async (req, res) => {
   const {
     name, position, description, countAll, price, dataset, id,

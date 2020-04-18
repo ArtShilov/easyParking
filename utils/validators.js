@@ -1,6 +1,7 @@
 const { body } = require('express-validator/check')
 
 exports.registerValidators = [
+  body('name', 'Название должно быть минимум 5 символов').isLength({ min: 5 }),
   body('phone').isMobilePhone('ru-RU').withMessage('Введите корректный номер'),
   body('password', 'Пароль должен быть минимум 5 символов').isLength({ min: 5 }),
   body('email', 'Введите корректный email').isEmail(),

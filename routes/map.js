@@ -1,39 +1,57 @@
-const express = require("express");
+const express = require('express');
+
 const router = express.Router();
-const User = require("../models/users");
-const Parking = require('../models/parking')
+const User = require('../models/users');
+const Parking = require('../models/parking');
 
 
 router.get('/', (req, res) => {
-    const { user } = req.session;
+  const { user } = req.session;
   if (req.session.user) {
-
-    res.render("map/index", { name: user.firstName, map: true, logged: true, logout: "/logout"});
+    res.render('map/index', {
+      name: user.firstName, map: true, logged: true, logout: '/logout',
+    });
   } else {
-    res.redirect("/login");
+    res.redirect('/login');
   }
-
 });
 
 router.get('/reserv/:id', async (req, res) => {
-  const id = req.params.id
-  const parking = await Parking.findById(id)
+  const { id } = req.params;
+  const parking = await Parking.findById(id);
   res.render('map/parking', {
     parking,
-    logged:true,
-    logout: "/org/logout"
-  })
-})
+    logged: true,
+    logout: '/org/logout',
+  });
+});
 
 router.post('/reserv', async (req, res) => {
-  const id = req.body.id
-  const parking = await Parking.findById(id)
+  const { id } = req.body;
+  const parking = await Parking.findById(id);
   parking.countNow -= 1;
   await parking.save();
   const reservedTime = req.body.time;
-  res.render('/map', { reservedTime, logged: true })
-})
+  res.render('/map', { reservedTime, logged: true });
+});
 
+
+router.get('/reserv/:id', async (req, res) => {
+  const { id } = req.params;
+  const parking = await Parking.findById(id);
+  res.render('map/parking', {
+    parking,
+  });
+});
+
+router.post('/reserv', async (req, res) => {
+  const { id } = req.body;
+  const parking = await Parking.findById(id);
+  parking.countNow -= 1;
+  await parking.save();
+  const reservedTime = req.body.time;
+  res.render('/map', { reservedTime, logged: true });
+});
 
 
 module.exports = router;

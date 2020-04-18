@@ -27,23 +27,26 @@
 <div id='parkingDescription'>
   <h2>{{parking.name}}</h2>
   <ul>
-    <li>{{parking.position}}</li>
-    <li>{{parking.description}}</li>
-    <li>{{parking.countAll}}</li>
-    <li>{{parking.price}}</li>
+    <li>Местоположение<br>{{parking.position}}</li>
+    <li>Описание<br>{{parking.description}}</li>
+    <li>Парковочных мест <br>{{parking.countAll}}</li>
+    <li>Свободных парковок <br>{{parking.countNow}}</li>
+    <li>Цена за час <br>{{parking.price}} руб.</li>
+
   </ul>
+  <div class="btnLinks">
+    <div>
+      <form action="/org/delete" method="POST">
+        <input type="hidden" name="id" value="{{parking._id}}">
+        <button class="btn bcRed" type="submit">Удалить парковку</button>
+      </form>
+    </div>
+    <div id="signUpLink" style="display: none;">
+      <div>
+        <button class='editOneParkingButton btn' type="submit">Изменить</button>
+      </div>
+    </div>
+  </div>
 </div>
 
-<form action="/org/delete" method="POST">
-  <input type="hidden" name="id" value="{{parking._id}}">
-  <button type="submit">Удалить парковку</button>
-</form>
-
-<div>
-<button class='editOneParkingButton' type="submit">Изменить</button>
-</div>
-  <span style="color:green" class="editMessageSpan"></span>
-<div id='editFormOpen' data-idpark="{{parking._id}}">
-</div>
-
-
+<div id='editFormOpen' data-idPark="{{parking._id}}"></div>
