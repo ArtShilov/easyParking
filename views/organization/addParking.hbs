@@ -1,51 +1,34 @@
 
-<script src="/js/logicParking.js" defer></script>
+<script src="/js/addparking.js" defer></script>
+
 
 {{#if error}}
 <p>{{error}}</p>
 {{/if}}
 
-<div class="container">
-  <div class="container-form">
-    <h1> Добавить парковку </h1>
-    <div class="jumbotron col-sm-4 pull-center">
-      {{#if message }}
-      <span>{{message}}</span>
-      {{/if}}
-      <form id="newparking" method="post">
+<form id="newparking" method="POST">
+  <div>
+    <label for="name">Название</label>
+    <input class="inpt" type="text" name="name" required value="{{data.name}}">
 
-        <div>
-          <input type="text" name="name" class="inpt" placeholder="Название" required />
-        </div>
-
-        <div>
-          <input type="text" name="position" class="inpt" placeholder="Местоположение" required />
-        </div>
-
-        <div>
-          <input type="text" name="description" class="inpt" placeholder="Описание" required />
-        </div>
-
-
-        <div>
-          <input type="text" name="countAll" class="inpt" placeholder="парковочных мест" required />
-        </div>
-
-        <div>
-          <input type="text" name="price" class="inpt" placeholder="цена за час" required />
-        </div>
-
-        <div>
-          <div class="btnLinks">
-            <div>
-              <input class="btn" type="submit" value="ДОБАВИТЬ" />
-            </div>
-            <div id="signUpLink">
-              <a class="link" href="/org/dashboard">ДОМОЙ</a>
-            </div>
-          </div>
-      </form>
-    </div>
   </div>
-</div>
+  <div>
+    <label for="Position">Адресс</label>
+    <input class="inpt" type="text" name="position" required value="{{data.position}}">
+  </div>
+  <div>
+    <label for="description">Описание</label>
+    <input class="inpt" type="text" name="description" required value="{{data.description}}">
+  </div>
+  <div>
+    <label for="countAll">Колличество парковок</label>
+    <input class="inpt" type="text" name="countAll" required value="{{data.countAll}}">
+  </div>
+  <div>
+    <label for="price">Цена за час</label>
+    <input class="inpt" type="text" name="price" required value="{{data.price}}">
+  </div>
+  <input class="btn" type="submit" value="Отправить">
+
+</form>
 

@@ -316,19 +316,9 @@ h1 {
   float: right
 }
 
-ul{
-  list-style-type: none;
+.ifoDiv{
   color: #404040;
-
+  font-size: 1.25rem;
+  margin: 10px 0;
 }
 
-.dblFontSize{
-  font-size: 1.5rem;
-}
-
-.list{
-  margin: 1rem 0;
-}
-.bcRed{
-  background-color: red;
-}

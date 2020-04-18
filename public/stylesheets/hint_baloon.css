@@ -10,9 +10,13 @@
     font-size: 20px;
 	line-height: 1;
 	color: #ffffff;
-    background-color: #f9b43b;
-	background-image: linear-gradient(to top, #f9b43b 0%, #eb8c38 48%, #f9b43b 74%, #f9b43b 100%);
-	border-radius: 20px;
+    background-color: #19BB4F;
+	/* background-image: linear-gradient(to top, #f9b43b 0%, #eb8c38 48%, #f9b43b 74%, #f9b43b 100%); */ 
+	border-radius: 4px;
+	margin: 0px;
+	border: 0px;
+
+
 }
 
 .map__balloon {
@@ -20,8 +24,8 @@
 	font-size: 30px;
 	line-height: 1;
 	color: #ffffff;
-	background-color: #f9b43b;
-	background-image: linear-gradient(to top, #f9b43b 0%, #eb8c38 48%, #f9b43b 74%, #f9b43b 100%);
+	/* background-color: #f9b43b;
+	background-image: linear-gradient(to top, #f9b43b 0%, #eb8c38 48%, #f9b43b 74%, #f9b43b 100%); */
 	border-radius: 20px;
 }
 

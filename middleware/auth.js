@@ -2,7 +2,7 @@
 // This usually happens when you stop your express server after login, your cookie still remains saved in the browser.
 function cookiesCleaner(req, res, next) {
   if (req.cookies.user_sid && !req.session.user) {
-    res.clearCookie("user_sid");
+    res.clearCookie('user_sid');
   }
   next();
 }
@@ -10,15 +10,15 @@ function cookiesCleaner(req, res, next) {
 // middleware function to check for logged-in users
 const sessionChecker = (req, res, next) => {
   if (req.session.user) {
-    res.redirect("/map");
+    res.redirect('/map');
   } else {
     next();
   }
 };
 
 const sessionOrgChecker = (req, res, next) => {
-  if (req.session.organization) {    
-    res.redirect("/org/dashboard");
+  if (req.session.organization) {
+    res.redirect('/org/dashboard');
   } else {
     next();
   }
@@ -27,5 +27,5 @@ const sessionOrgChecker = (req, res, next) => {
 module.exports = {
   sessionChecker,
   cookiesCleaner,
-  sessionOrgChecker
+  sessionOrgChecker,
 };
