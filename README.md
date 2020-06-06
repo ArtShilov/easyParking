@@ -15,8 +15,10 @@
   + Возможность забронировать место на парковке
 
 ## Изображения
-![easyParking](/map.jpg)
-![easyParking](/menu.jpg)
+<p align="center">
+  <img src="/map.jpg" width="350" title="map">
+  <img src="/menu.jpg" width="350" alt="munu">
+</p>
 
 ## Запуск
 ```sh
